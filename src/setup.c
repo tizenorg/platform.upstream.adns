@@ -464,7 +464,7 @@ static const char *instrum_getenv(adns_state ads, const char *envvar) {
 static void readconfig(adns_state ads, const char *filename, int warnmissing) {
   getline_ctx gl_ctx;
   
-  gl_ctx.file= fopen(filename,"r");
+  gl_ctx.file= fopen(filename,"re");
   if (!gl_ctx.file) {
     if (errno == ENOENT) {
       if (warnmissing)
@@ -572,7 +572,7 @@ static int init_finish(adns_state ads) {
   }
 
   proto= getprotobyname("udp"); if (!proto) { r= ENOPROTOOPT; goto x_free; }
-  ads->udpsocket= socket(AF_INET,SOCK_DGRAM,proto->p_proto);
+  ads->udpsocket= socket(AF_INET,SOCK_DGRAM|SOCK_CLOEXEC,proto->p_proto);
   if (ads->udpsocket<0) { r= errno; goto x_free; }
 
   r= adns__setnonblock(ads,ads->udpsocket);
