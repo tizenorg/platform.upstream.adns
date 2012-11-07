@@ -7,15 +7,8 @@ Summary:        Advanced Easy-to-Use Asynchronous-Capable DNS Utilities
 Url:            http://www.chiark.greenend.org.uk/~ian/adns/
 Group:          Productivity/Networking/DNS/Utilities
 Source:         %{name}-%{version}.tar.bz2
-Source1:        README.SUSE
 Source2:        baselibs.conf
-Patch0:         %{name}-%{version}-destdir.patch
-Patch1:         %{name}-%{version}-configure.patch
-Patch2:         %{name}-%{version}-ipv6.patch
-Patch3:         adns-visibility.patch
-Patch4:         adns-ocloexec.patch
 BuildRequires:  autoconf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
 adns includes a collection of useful DNS resolver utilities.
@@ -41,12 +34,6 @@ programs with libads support.
 
 %prep
 %setup -q
-%patch0
-%patch1
-%patch2
-%patch3
-%patch4
-cp %{SOURCE1} .
 
 %build
 autoreconf -fiv
