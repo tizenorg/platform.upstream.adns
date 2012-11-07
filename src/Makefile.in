@@ -28,10 +28,11 @@ include		$(srcdir)/../settings.make
 include		adns.make
 
 install:
-		mkdir -p $(libdir) $(includedir)
+		$(INSTALL_PROGRAM) -d $(DESTDIR)/$(libdir)
+		$(INSTALL_PROGRAM) -d $(DESTDIR)/$(includedir)
 		set -xe; for f in $(TARGETS); \
-			do $(INSTALL_DATA) $$f $(libdir)/$$f; done
-		$(INSTALL_DATA) $(srcdir)/../src/adns.h $(includedir)/adns.h
+			do $(INSTALL_DATA) $$f $(DESTDIR)/$(libdir)/$$f; done
+		$(INSTALL_DATA) $(srcdir)/../src/adns.h $(DESTDIR)/$(includedir)/adns.h
 
 uninstall:
 		for f in $(TARGETS); do rm -f $(libdir)/$$f; done
