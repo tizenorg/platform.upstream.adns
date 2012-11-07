@@ -49,6 +49,7 @@ typedef unsigned char byte;
 # include "hredirect.h"
 #endif
 
+#pragma GCC visibility push(hidden)
 /* Configuration and constants */
 
 #define MAXSERVERS 5
@@ -803,4 +804,5 @@ static inline int errno_resources(int e) { return e==ENOMEM || e==ENOBUFS; }
 		       (tv)|=GETIL_B(cb),		\
 		       (tv) )
 
+#pragma GCC visibility pop
 #endif
