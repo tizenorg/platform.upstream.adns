@@ -16,7 +16,6 @@ adns includes a collection of useful DNS resolver utilities.
 %package -n %lname
 Summary:        Advanced DNS resolver client library
 Group:          System/Libraries
-Provides:       libadns = %{version}
 
 %description -n %lname
 Libadns is an advanced, easy to use, asynchronous-capable DNS resolver
@@ -46,7 +45,7 @@ make %{?_smp_mflags} all
 
 %files
 %defattr(-,root,root)
-%doc COPYING GPL-vs-LGPL LICENCE.WAIVERS
+%license COPYING GPL-vs-LGPL LICENCE.WAIVERS
 %{_bindir}/adns*
 
 %files -n %lname
