@@ -8,6 +8,7 @@ Url:            http://www.chiark.greenend.org.uk/~ian/adns/
 Group:          Productivity/Networking/DNS/Utilities
 Source:         %{name}-%{version}.tar.bz2
 Source2:        baselibs.conf
+Source1001: 	adns.manifest
 BuildRequires:  autoconf
 
 %description
@@ -33,6 +34,7 @@ programs with libads support.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 autoreconf -fiv
@@ -44,15 +46,18 @@ make %{?_smp_mflags} all
 
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %license COPYING GPL-vs-LGPL LICENCE.WAIVERS
 %{_bindir}/adns*
 
 %files -n %lname
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_libdir}/libadns.so.1*
 
 %files -n libadns-devel
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_includedir}/adns.h
 %{_libdir}/libadns.so
