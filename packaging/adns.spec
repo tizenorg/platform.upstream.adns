@@ -1,14 +1,14 @@
 Name:           adns
-%define lname	libadns
+%define lname   libadns
 Version:        1.4
 Release:        0
 License:        GPL-2.0+
 Summary:        Advanced Easy-to-Use Asynchronous-Capable DNS Utilities
 Url:            http://www.chiark.greenend.org.uk/~ian/adns/
-Group:          Productivity/Networking/DNS/Utilities
+Group:          System/Utilities
 Source:         %{name}-%{version}.tar.bz2
 Source2:        baselibs.conf
-Source1001: 	adns.manifest
+Source1001:     adns.manifest
 BuildRequires:  autoconf
 
 %description
@@ -24,7 +24,7 @@ client library for C (and C++) programs.
 
 %package -n libadns-devel
 Summary:        Libraries and header files to develop programs with libadns support
-Group:          Development/Languages/C and C++
+Group:          System/Libraries
 Requires:       %lname = %{version}
 Requires:       glibc-devel
 
@@ -37,13 +37,15 @@ programs with libads support.
 cp %{SOURCE1001} .
 
 %build
-autoreconf -fiv
-%configure
-make %{?_smp_mflags} all
+%reconfigure
+%__make %{?_smp_mflags} all
 
 %install
 %make_install
 
+%post -n %lname -p /sbin/ldconfig
+
+%postun -n %lname -p /sbin/ldconfig
 
 %files
 %manifest %{name}.manifest
@@ -61,9 +63,3 @@ make %{?_smp_mflags} all
 %defattr(-,root,root)
 %{_includedir}/adns.h
 %{_libdir}/libadns.so
-
-%post -n %lname -p /sbin/ldconfig
-
-%postun -n %lname -p /sbin/ldconfig
-
-%changelog
