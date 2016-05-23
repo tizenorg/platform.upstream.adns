@@ -37,6 +37,8 @@ programs with libads support.
 cp %{SOURCE1001} .
 
 %build
+%restore_fcommon
+
 %reconfigure
 %__make %{?_smp_mflags} all
 
